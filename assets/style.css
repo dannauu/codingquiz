@@ -1,0 +1,24 @@
+.buttons {
+    background: blueviolet;
+    border: black;
+    color: white;
+    border-radius: 5%;
+}
+
+.question-container {
+    position: relative;
+        top: 200px;
+        left: 450px;
+}
+
+.answer-buttons {
+    position: relative;
+        top: 200px;
+        left: 450px;
+}
+
+.start-button {
+    position: relative;
+        top: 200px;
+        left: 585px;
+}

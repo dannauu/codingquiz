@@ -1,6 +1,10 @@
-var startButton = $('.start-button');
+var startButton = document.getElementById('start-btn')
 var questionDiv = $('.question');
 var answerButtons = $('.answer-buttons');
+var questionIndex = 0;
+var currentQuestionIndex = 0;
+var timer = document.getElementById('timer');
+var questionCount = 0;
 var questions = [
             
                 {
@@ -31,8 +35,61 @@ var questions = [
 
             ];
 
-            
+startButton.addEventListener('click', startGame)
 
-            
+function startGame(){
+    startButton.classList.add('hide')
+    currentQuestionIndex = 0;
+    showQuestion();
+    
+}
 
-            
+function showQuestion() {
+    if (questionCount < questions.length) {
+        questionDiv.innerHTML = questions[questionCount].title;
+}
+
+
+    function setTime() {
+        var timerInterval = setInterval(function() {
+          secondsLeft--;
+          timer.textContent = "";
+          timer.textContent = "Time: " + secondsLeft;
+          if (secondsLeft <= 0 || questionCount === questions.length) {
+            clearInterval(timerInterval);
+            captureUserScore();
+          } 
+        }, 1000);
+    }}
+
+    function captureUserScore() {
+        timer.remove();
+        choices.textContent = "";
+      
+        let initialsInput = document.createElement("input");
+        let postScoreBtn = document.createElement("input");
+      
+        results.innerHTML = `You scored ${score} points! Enter initials: `;
+        initialsInput.setAttribute("type", "text");
+        postScoreBtn.setAttribute("type", "button");
+        postScoreBtn.setAttribute("value", "Post My Score!");
+        postScoreBtn.addEventListener("click", function (event) {
+          event.preventDefault();
+          let scoresArray = defineScoresArray(storedArray, emptyArray);
+      
+          let initials = initialsInput.value;
+          let userAndScore = {
+            initials: initials,
+            score: score,
+          };
+      
+          scoresArray.push(userAndScore);
+          saveScores(scoresArray);
+          displayAllScores();
+          clearScoresBtn();
+          goBackBtn();
+          viewScoresBtn.remove();
+        });
+        results.append(initialsInput);
+        results.append(postScoreBtn);
+      }
